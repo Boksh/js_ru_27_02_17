@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentList from './CommnetList'
 
 class Article extends Component {
 
@@ -17,6 +18,7 @@ class Article extends Component {
             <div>
                 <h3 onClick={this.handleClick}>{article.title}</h3>
                 {body}
+                <CommentList comments={article.comments}/>
             </div>
         )
     }
