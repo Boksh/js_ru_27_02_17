@@ -1,7 +1,7 @@
 /**
  * Created by Boksh on 02.03.2017.
  */
-import React, {Component} from 'react'
+import React from 'react'
 
 export default (props) => {
     const {comment} = props
