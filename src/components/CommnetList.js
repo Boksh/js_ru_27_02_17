@@ -20,6 +20,7 @@ class CommentList extends Component {
         const isComments = comments && comments.length > 0
 
         // какая-то кривота, или нормально? Как сделать изящнее?
+        //лучше вынести это все в методы, незачем их на лету создавать
         const body = () => {
             if (isOpen && isComments) {
                 return (
