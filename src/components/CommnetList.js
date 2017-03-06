@@ -14,35 +14,42 @@ class CommentList extends Component {
         }
     }
 
-    render() {
+    isComments() {
+        return this.props.comments && this.props.comments.length > 0
+    }
+
+    createBody() {
+
+        const {isOpen} = this.state
+
+        if (isOpen && this.isComments()) {
+            return (
+                <ul>
+                    {this.props.comments.map(comment => <Comment key={comment.id} comment={comment}/>)}
+                </ul>
+            )
+        }
+    }
+
+    createButtonText() {
+
         const {comments} = this.props
         const {isOpen} = this.state
-        const isComments = comments && comments.length > 0
 
-        // какая-то кривота, или нормально? Как сделать изящнее?
-        //лучше вынести это все в методы, незачем их на лету создавать
-        const body = () => {
-            if (isOpen && isComments) {
-                return (
-                    <ul>
-                        {comments.map(comment => <Comment key={comment.id} comment={comment}/>)}
-                    </ul>
-                )
-            }
-        }
+        let text = isOpen ? 'Скрыть' : 'Показать';
+        text = this.isComments() ? text + ' - ' + comments.length : null
+        return text
+    }
 
-        const buttonText = () => {
-            let text = isOpen ? 'Скрыть' : 'Показать';
-            text = isComments ? text + ' - ' + comments.length : null
-            return text
-        }
 
-        const showComments = isComments ? <button onClick={this.handleClick}>{buttonText()}</button> : <p>Нет комментариев</p>
+    render() {
+
+        const showComments = this.isComments() ? <button onClick={this.handleClick}>{this.createButtonText()}</button> : <p>Нет комментариев</p>
 
         return (
             <div className="comments-block">
                 {showComments}
-                {body()}
+                {this.createBody()}
             </div>
         )
     }
