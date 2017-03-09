@@ -4,6 +4,14 @@ import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
 
+    constructor() {
+        super()
+        this.state = {
+            name : '',
+            text: ''
+        }
+    }
+
     static propTypes = {
         comments: PropTypes.array
     }
@@ -23,8 +31,66 @@ class CommentList extends Component {
             <div ref={this.getContainerRef}>
                 <a href="#" onClick={toggleOpen}>{isOpen ? 'hide' : 'show'} comments</a>
                 {this.getBody()}
+                <form>
+                    <div>
+                        <label>
+                            Имя:
+                            <input
+                                type="text"
+                                value={this.state.name}
+                                onChange={this.validateName} />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Комментарий:
+                            <textarea
+                                type="text"
+                                value={this.state.text}
+                                onChange={this.validateComment} />
+                        </label>
+                    </div>
+                    <input type="submit" value="Submit" onClick={this.commentAdd} />
+                </form>
             </div>
         )
+    }
+
+    commentAdd = ev => {
+        ev.preventDefault()
+        console.log(`Добавление коммента. Имя: ${this.state.name}, Текст: ${this.state.text}`);
+        this.setState({
+            name: '',
+            text: ''
+        })
+    }
+
+    validateName = ev => {
+        if (ev.target.value.length > 10) {
+            console.warn('Имя не должно быть больше 10 знаков')
+            ev.target.style.borderColor = "red"
+            return
+        } else {
+            ev.target.style.borderColor = ""
+        }
+
+        this.setState({
+            name: ev.target.value
+        })
+    }
+
+    validateComment = ev => {
+        if (ev.target.value.length > 150) {
+            console.warn('Комментарий не должен быть больше 150 знаков')
+            ev.target.style.borderColor = "red"
+            return
+        } else {
+            ev.target.style.borderColor = ""
+        }
+
+        this.setState({
+            text: ev.target.value
+        })
     }
 
     getContainerRef = (ref) => {
