@@ -31,7 +31,7 @@ class App extends Component {
             moment.locale('ru')
             return <p>
                 Вы выбралидни с { moment(from).format('LL') } по { moment(to).format('LL') }.
-                { ' ' }<a href="." onClick={ this.handleResetClick }>Сбросить </a>
+                { ' ' }<a href="." onClick={ this.handleResetClicke }>Сбросить </a>
             </p>
         }
     }
