@@ -1,0 +1,15 @@
+#commentForm {
+    width: 20%
+}
+
+#commentForm div{
+    text-align: right;
+    padding: 10px 0px
+}
+
+#commentForm div input,
+#commentForm div textarea{
+    margin-left: 10px;
+    width: 65%
+}
+
