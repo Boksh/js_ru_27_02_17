@@ -6,6 +6,7 @@ class CommentForm extends Component {
     getInitialState = () => {
         return {
             name: '',
+            //лучше хранить минимальный стейт. У тебя есть isNameValid - nameStyle уже лишнее
             nameStyle: {
                 borderColor: ''
             },
