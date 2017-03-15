@@ -32,6 +32,7 @@ class ArticleList extends Component {
 
 const mapStateToProps = state => {
     console.log('---', 'AL, state = ', state)
+    //все правильно, но тут .slice() ничего не решает
     let artFiltes = state.articles.slice()
 
     if (state.filters.selectFilter && state.filters.selectFilter.length > 0) {
