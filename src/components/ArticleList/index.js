@@ -31,9 +31,33 @@ class ArticleList extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('---', 'connect, state = ', state)
+    console.log('---', 'AL, state = ', state)
+    let artFiltes = state.articles.slice()
+
+    if (state.filters.selectFilter && state.filters.selectFilter.length > 0) {
+        let filter = state.filters.selectFilter.map(filter => filter.value);
+        artFiltes = artFiltes.filter(article => filter.indexOf(article.id) > -1)
+    }
+
+    if (state.filters.dpFilter) {
+        artFiltes = artFiltes.filter(article => {
+            let bool = true
+
+            if (state.filters.dpFilter.from !== null) {
+                bool &= (Date.parse(article.date) >= Date.parse(state.filters.dpFilter.from))
+            }
+
+            if (state.filters.dpFilter.to !== null) {
+                bool &= (Date.parse(article.date) <= Date.parse(state.filters.dpFilter.to))
+            }
+
+            return bool
+        })
+
+    }
+
     return {
-        articles: state.articles
+        articles:  artFiltes
     }
 }
 

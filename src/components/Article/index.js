@@ -5,7 +5,6 @@ import CSSTransition from 'react-addons-css-transition-group'
 import {connect} from 'react-redux'
 import {deleteArticle} from '../../AC'
 import './style.css'
-
 class Article extends Component {
     /*
      shouldComponentUpdate(nextProps, nextState) {
@@ -23,7 +22,7 @@ class Article extends Component {
             : null
         return (
             <div>
-                <h3 onClick={toggleOpen}>{article.title}</h3>
+                <h3 onClick={toggleOpen}>{article.title} <span className="data">({article.date})</span></h3>
                 <a href="#" onClick={this.handleDelete}>delete me</a>
                 <CSSTransition
                     transitionName="article"
