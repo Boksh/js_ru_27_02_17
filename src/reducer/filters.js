@@ -26,6 +26,7 @@ export default (state = initialState, action) => {
             if (state.selectFilter)
                 return {
                     ...state,
+                    //хорошо, но я б в AC делал
                     selectFilter: state.selectFilter.filter(filter => filter.value !== payload.id)
                 }
             else {
