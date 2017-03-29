@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import ArticlesPage from './ArticlesPage'
+import CommentsPage from './CommentsPage'
 import NotFound from './NotFound'
 import Filters from './Filters/index'
 import Counter from './Counter'
@@ -29,11 +30,14 @@ class App extends Component {
                         <MenuItem path="/counter"/>
                         <MenuItem path="/filters"/>
                         <MenuItem path="/articles"/>
+                        <MenuItem path="/comments"/>
                     </Menu>
                     <Switch>
                         <Route path="/counter" component={Counter} exact />
                         <Route path="/filters" component={Filters} />
                         <Route path="/articles" component={ArticlesPage} />
+                        <Route path="/comments" component={CommentsPage} />
+                        <Route path="/comments/:page" component={CommentsPage} />
                         <Route path="*" component={NotFound} />
                     </Switch>
                 </div>
