@@ -11,6 +11,7 @@ const CommentModel = Record({
 const DefaultReducerState = Record({
     entities: new Map({}),
     loading: false,
+    //плохой выбор, лучше Set или Map
     loaded: []
 })
 
