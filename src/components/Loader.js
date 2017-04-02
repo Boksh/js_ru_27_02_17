@@ -1,12 +1,15 @@
 import React, { PropTypes } from 'react'
 
-function Loader(props) {
+function Loader(props, context) {
+    const loaderText = (context.lang === 'EN') ? 'Loading' : 'Загрузка'
     return (
-        <h2>Loading...</h2>
+        <h2>{loaderText}...</h2>
     )
 }
 
-Loader.propTypes = {
+Loader.contextTypes = {
+    lang: PropTypes.string
 }
+
 
 export default Loader

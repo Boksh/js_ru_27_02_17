@@ -10,34 +10,50 @@ import CommentsPage from './CommentsPage'
 import Menu, {MenuItem} from './Menu/index'
 import {loadAllArticles} from '../AC'
 import history from '../history'
+import Select from 'react-select'
 
 class App extends Component {
     static propTypes = {
     };
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        lang: PropTypes.string
     }
 
     state = {
-        text: ''
+        text: '',
+        selected: 'EN'
     }
 
     getChildContext() {
         return {
-            user: this.state.text
+            user: this.state.text,
+            lang: this.state.selected
         }
     }
 
     componentDidMount() {
         this.props.loadAllArticles()
     }
+    
+    localeChange = (selected) => {
+        this.setState({
+            selected: selected.value
+        })
+    } 
 
     render() {
         return (
             <ConnectedRouter history={history}>
                 <div>
                     Enter your name: <input type="text" value={this.state.text} onChange={this.handleTextChange}/>
+                    <Select
+                        options={[{label: 'English', value: 'EN'},{label: 'Русский', value: 'RU'}]}
+                        placeholder="Choose language"
+                        value={this.state.selected}
+
+                        onChange={this.localeChange}/>
                     <Menu>
                         <MenuItem path="/counter"/>
                         <MenuItem path="/filters"/>

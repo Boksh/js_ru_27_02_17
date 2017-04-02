@@ -13,7 +13,8 @@ class CommentList extends Component {
     }
 
     static contextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        lang: PropTypes.string
     }
 
     componentWillReceiveProps({isOpen, article, checkAndLoadArticleComments}) {
@@ -27,9 +28,14 @@ class CommentList extends Component {
     render() {
         const {isOpen, toggleOpen} = this.props
 //        console.log('---', this.size)
+
+        const clickText =  (this.context.lang==='EN') ?
+            <a href="#" onClick={toggleOpen}>{isOpen ? 'hide' : 'show'} comments</a> :
+            <a href="#" onClick={toggleOpen}>{isOpen ? 'скрыть' : 'показать'} комментарии</a>
+
         return (
             <div ref={this.getContainerRef}>
-                <a href="#" onClick={toggleOpen}>{isOpen ? 'hide' : 'show'} comments</a>
+                {clickText}
                 {this.getBody()}
             </div>
         )
@@ -59,7 +65,7 @@ class CommentList extends Component {
         const commentItems = article.comments.map(id => <li key={id}><Comment id={id} /></li>)
         return (
             <div>
-                user: {this.context.user}
+                {this.context.lang==='EN' ? 'User ': 'Пользователь '}: {this.context.user}
                 <ul>
                     {commentItems}
                 </ul>
